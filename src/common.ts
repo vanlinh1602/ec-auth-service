@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { nanoid } from 'nanoid';
 
 export const generateID = (
@@ -8,4 +9,32 @@ export const generateID = (
   const id = `${options?.prefix ?? ''}${nanoid(size)}`;
   if (ids.includes(id)) return generateID(ids, size, options);
   return id;
+};
+
+export const callAPI = async (
+  url: string,
+  params: any,
+  method: 'GET' | 'POST' = 'GET',
+) => {
+  try {
+    if (method === 'POST') {
+      const response = await axios.post(url, params, {
+        baseURL: process.env.API_URL,
+        withCredentials: true,
+      });
+      if (response.status !== 200) return null;
+      const data = response.data;
+      return data;
+    }
+    const response = await axios.get(url, {
+      baseURL: process.env.API_URL,
+      withCredentials: true,
+      params,
+    });
+    if (response.status !== 200) return null;
+    const data = response.data;
+    return data;
+  } catch {
+    return null;
+  }
 };

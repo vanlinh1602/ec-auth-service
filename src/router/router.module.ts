@@ -1,8 +1,7 @@
 import { DynamicModule, ForwardReference, Module, Type } from '@nestjs/common';
 import { RouterModule as NestJsRouterModule } from '@nestjs/core';
 
-import { RouterStudentModule } from './routes/routers.students.module';
-import { RouterTeacherModule } from './routes/routers.teachers.module';
+import { RouterAuthModule } from './routes/routers.auth.module';
 
 @Module({})
 export class RouterModule {
@@ -15,15 +14,11 @@ export class RouterModule {
     )[] = [];
 
     // import router modules
-    imports.push(RouterStudentModule, RouterTeacherModule);
+    imports.push(RouterAuthModule);
     const routes = [
       {
-        path: '/students',
-        module: RouterStudentModule,
-      },
-      {
-        path: '/teachers',
-        module: RouterTeacherModule,
+        path: '/',
+        module: RouterAuthModule,
       },
     ];
 

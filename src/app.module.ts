@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import configs from './configs';
-import { DatabaseModule } from './database/database.module';
 import { RouterModule } from './router/router.module';
 
 @Module({
@@ -14,7 +13,6 @@ import { RouterModule } from './router/router.module';
       envFilePath: ['.env', '.env.development'],
       expandVariables: true,
     }),
-    DatabaseModule,
     RouterModule.forRoot(),
   ],
   controllers: [],
