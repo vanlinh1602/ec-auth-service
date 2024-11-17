@@ -22,7 +22,6 @@ export const callAPI = async (
         baseURL: process.env.API_URL,
         withCredentials: true,
       });
-      if (response.status !== 200) return null;
       const data = response.data;
       return data;
     }
