@@ -13,7 +13,7 @@ export const generateID = (
 
 export const callAPI = async (
   url: string,
-  params: any,
+  params?: any,
   method: 'GET' | 'POST' = 'GET',
 ) => {
   try {

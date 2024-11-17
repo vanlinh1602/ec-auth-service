@@ -11,7 +11,7 @@ export class AuthService implements IAuthService {
     if (server === 'management') {
       const verify = await callAPI('/staffs/get', { email: email });
       if (verify.length) {
-        return { user: verify[0], role: 'staff' };
+        return { user: verify[0], role: verify[0].role };
       }
     } else {
       const studentData = await callAPI('/students/get', { email: email });
