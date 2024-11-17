@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Session } from '@nestjs/common';
+import { Body, Controller, Post, Put, Session } from '@nestjs/common';
 
 import { AuthService } from '../services/auth.service';
 
@@ -31,7 +31,7 @@ export class AuthApiController {
     return null;
   }
 
-  @Post('/update')
+  @Put('/update')
   async updateUser(
     @Body() data: { role: string; user: any; server: string },
   ): Promise<{ success: boolean }> {

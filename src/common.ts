@@ -14,11 +14,19 @@ export const generateID = (
 export const callAPI = async (
   url: string,
   params?: any,
-  method: 'GET' | 'POST' = 'GET',
+  method: 'GET' | 'POST' | 'PUT' = 'GET',
 ) => {
   try {
     if (method === 'POST') {
       const response = await axios.post(url, params, {
+        baseURL: process.env.API_URL,
+        withCredentials: true,
+      });
+      const data = response.data;
+      return data;
+    }
+    if (method === 'PUT') {
+      const response = await axios.put(url, params, {
         baseURL: process.env.API_URL,
         withCredentials: true,
       });

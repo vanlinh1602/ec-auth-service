@@ -9,16 +9,16 @@ export class AuthService implements IAuthService {
 
   async login(server: string, email: any): Promise<any> {
     if (server === 'management') {
-      const verify = await callAPI('/staffs/get', { email: email });
+      const verify = await callAPI('/staffs', { email: email });
       if (verify.length) {
         return { user: verify[0], role: verify[0].role };
       }
     } else {
-      const studentData = await callAPI('/students/get', { email: email });
+      const studentData = await callAPI('/students', { email: email });
       if (studentData.length) {
         return { user: studentData[0], role: 'student' };
       }
-      const teacherData = await callAPI('/teachers/get', { email: email });
+      const teacherData = await callAPI('/teachers', { email: email });
       if (teacherData.length) {
         return { user: teacherData[0], role: 'teacher' };
       }
@@ -29,31 +29,31 @@ export class AuthService implements IAuthService {
   async updateInfo(server: string, role: string, data: any): Promise<any> {
     if (server === 'management') {
       return await callAPI(
-        '/staffs/update',
+        '/staffs',
         {
           id: data.id,
           staff: data,
         },
-        'POST',
+        'PUT',
       );
     } else {
       if (role === 'student') {
         return await callAPI(
-          '/students/update',
+          '/students',
           {
             id: data.id,
             student: data,
           },
-          'POST',
+          'PUT',
         );
       } else {
         return await callAPI(
-          '/teachers/update',
+          '/teachers',
           {
             id: data.id,
             teacher: data,
           },
-          'POST',
+          'PUT',
         );
       }
     }
